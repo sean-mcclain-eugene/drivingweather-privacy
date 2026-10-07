@@ -1,0 +1,10 @@
+# GitHub Pages config for https://sean-mcclain-eugene.github.io/drivingweather-privacy/
+# Repo: sean-mcclain-eugene/drivingweather-privacy (public). Pages source: main branch, / (root).
+title: Driving Weather Privacy Policy
+description: Privacy policy for the Driving Weather Android app
+theme: jekyll-theme-minimal   # supported GitHub Pages theme; provides the "default" layout
+show_downloads: false
+lang: en-US
+# baseurl is set automatically by GitHub Pages for project sites (/drivingweather-privacy).
+exclude:
+  - README.md
