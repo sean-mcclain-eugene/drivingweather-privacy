@@ -21,7 +21,7 @@ This policy covers the Android app **Driving Weather** (package `com.drivingweat
 ## Information the app uses
 
 ### Places you type or choose
-When you type in the Start, Stop, or End fields, the text you've typed so far (for example "Eug" while typing "Eugene") goes to **Open-Meteo's geocoding service** so the app can suggest matching places. Once you pick places and plan a trip, their coordinates go to the routing and weather services below.
+When you type in the Start, Stop, or End fields, the text you've typed so far (for example "New Y" while typing "New York") goes to **Open-Meteo's geocoding service** so the app can suggest matching places. Once you pick places and plan a trip, their coordinates go to the routing and weather services below.
 
 ### Your location (optional)
 If you tap **"Use current location"**, Android asks whether to allow location access. You can allow **precise** or **approximate** location, or deny it.
@@ -35,7 +35,7 @@ If you tap **"Use current location"**, Android asks whether to allow location ac
 To work out the forecast for the hour you'll pass each town, the app uses your departure date and time, your stops, and any layover hours. It sends the trip dates to Open-Meteo and the departure time to Google's Directions service when Google routing is used. Layover hours are only used on your phone.
 
 ### Technical information every internet request includes
-Like any app that goes online, each request reveals your device's **IP address** to the service receiving it. The app also sends a fixed app identifier (a "User-Agent" with the app's name and the developer contact address drivingweather.app.nws@gmail.com), which some services require. This identifier is the same for every user and contains nothing about you.
+Like any app that goes online, each request reveals your device's **IP address** to the service receiving it. The app also sends a fixed app identifier (a "User-Agent" with the app's name and a developer contact email address), which some services require. This identifier is the same for every user and contains nothing about you.
 
 ### Information the app does not collect
 No name, email address, phone number, contacts, photos, files, account details, payment information, advertising ID, or usage analytics.
@@ -86,4 +86,4 @@ If the app's data practices change, I'll update this page and its effective date
 
 ## Contact
 
-Questions about this policy or the app: [drivingweather.app.nws@gmail.com](mailto:drivingweather.app.nws@gmail.com)
+Questions about this policy or the app: [mcclain.sean.appdev@gmail.com](mailto:mcclain.sean.appdev@gmail.com)
