@@ -6,7 +6,7 @@ permalink: /
 
 # Privacy Policy for Driving Weather
 
-**Effective date:** [date this version is published]
+**Effective date:** October 21, 2026
 
 This policy covers the Android app **Driving Weather** (package `com.drivingweather.app`), made by Sean McClain ("I", "me"). It explains what information the app uses, where that information goes, and the choices you have.
 
