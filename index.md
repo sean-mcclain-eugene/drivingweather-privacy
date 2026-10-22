@@ -12,33 +12,33 @@ This policy covers the Android app **Driving Weather** (package `com.drivingweat
 
 ## The short version
 
-- Driving Weather is **free and non-commercial**. It has no ads, no in-app purchases, no subscriptions, **no accounts, no analytics, and no tracking**.
+- Driving Weather is **free and non-commercial**. It has no ads, no in-app purchases, no subscriptions, **no accounts, no analytics, no crash reporting, and no tracking**.
 - **I don't run a server.** The app doesn't send your information to me, and I don't receive, store, sell, or monetize it.
 - To plan a trip, the app sends the places you enter or choose, and your current location if you choose to use it, **directly from your phone** to the third-party map, routing, and weather services listed below. They need this information to return directions, town names, forecasts, and alerts.
 - The app uses your location **only while you're using it**, and **only when you tap "Use current location."** It never uses location in the background.
-- The app keeps your last 10 trips on your phone only, so you can reuse them; they never leave your device. A trip PDF is created only when you ask for one, and you choose where to send it.
+- The app keeps your last 10 trips on your phone so you can plan them again. This saved list isn't sent to me or anyone else and isn't included in device backups. When you plan a trip, including a saved one, its places are sent to the services below. A trip PDF is created only when you ask for one, and you choose where to send it.
 
 ## Information the app uses
 
 ### Places you type or choose
-When you type in the Start, Stop, or End fields, the text you've typed so far (for example "New Y" while typing "New York") goes to **Open-Meteo's geocoding service** so the app can suggest matching places. Once you pick places and plan a trip, their coordinates go to the routing and weather services below.
+When you type at least two characters in the Start, Stop, or End fields, the text you've typed so far goes to **Open-Meteo's geocoding service** so the app can suggest matching places. For example, "Bo" goes out while you type "Boise". Once you pick places and plan a trip, their coordinates go to the routing and weather services below.
 
 ### Your location (optional)
 If you tap **"Use current location"**, Android asks whether to allow location access. You can allow **precise** or **approximate** location, or deny it.
 
-- If you allow it, the app gets your device's location **once**, through Google Play services' location service on your phone, and uses it as your trip's starting point.
-- To show a place name instead of raw coordinates, the app sends that location to **OpenStreetMap Nominatim**. Because it becomes your trip's start, it is also used in the trip requests below: routing, weather, the map image in the PDF, and "Open in Google Maps".
-- The app **doesn't** track you, keep watching your location, use location in the background, or save your location history.
+- If you allow it, the app asks Google Play services on your phone for a **single** current position and uses it as your trip's starting point. If a fresh position isn't available, the app may use a position your phone already recorded in the last 15 minutes.
+- To show a place name instead of raw coordinates, the app sends your exact location to **OpenStreetMap Nominatim**. Because it becomes your trip's start, it is also used in the trip requests below: routing, weather, the map image in the PDF, and "Open in Google Maps".
+- The app **doesn't** track you, keep watching your location, use location in the background, or save your location history. If you plan the trip, its start is saved in Recent trips as described below.
 - If you deny permission, you can still type a start place. To change your choice later, go to Android **Settings → Apps → Driving Weather → Permissions → Location**.
 
 ### Trip details
-To work out the forecast for the hour you'll pass each town, the app uses your departure date and time, your stops, and any layover hours. It sends the trip dates to Open-Meteo and the departure time to Google's Directions service when Google routing is used. Layover hours are only used on your phone.
+To work out the forecast for the hour you'll pass each town, the app uses your departure date and time, your stops, and any layover hours. It sends the trip dates to Open-Meteo. When Google routing is used, it also sends your departure time to Google's Directions service, but only if that time is still in the future. Layover hours are used only on your phone.
 
 ### Technical information every internet request includes
 Like any app that goes online, each request reveals your device's **IP address** to the service receiving it. The app also sends a fixed app identifier (a "User-Agent" with the app's name and a developer contact email address), which some services require. This identifier is the same for every user and contains nothing about you.
 
 ### Information the app does not collect
-No name, email address, phone number, contacts, photos, files, account details, payment information, advertising ID, or usage analytics.
+No name, email address, phone number, contacts, photos, files, account details, payment information, advertising ID, usage analytics, or crash reports.
 
 ## Third-party services the app talks to
 
@@ -48,25 +48,26 @@ Your phone connects to these services directly, over encrypted HTTPS connections
 |---|---|---|---|
 | **Open-Meteo Geocoding API** (`geocoding-api.open-meteo.com`, OpenMeteo GmbH, Switzerland) | Place suggestions and place lookup | The text you type in the Start, Stop, and End fields | [Terms & privacy](https://open-meteo.com/en/terms) · [Data license (CC BY 4.0)](https://open-meteo.com/en/license) |
 | **Open-Meteo Forecast API** (`api.open-meteo.com`) | Hourly forecasts for each weather zone on your route | Coordinates of points along your route; trip dates | Same as above |
-| **Open-Meteo Historical Weather API** (`archive-api.open-meteo.com`) | Past weather, used only if you plan a trip for a date that has already passed | Coordinates of points along your route; trip dates | Same as above |
-| **OpenStreetMap Nominatim** (`nominatim.openstreetmap.org`, run by the OpenStreetMap Foundation) | Town names along your route, and a name for your current location | Coordinates of points along your route, and your current location if you use that feature | [OSMF Privacy Policy](https://osmfoundation.org/wiki/Privacy_Policy) · [Nominatim Usage Policy](https://operations.osmfoundation.org/policies/nominatim/) · [OSMF Terms of Use](https://osmfoundation.org/wiki/Terms_of_Use) |
-| **Google Directions API** (`maps.googleapis.com`, Google LLC) | Driving directions (the app's main routing service) | Coordinates of your start, stops, and destination; your departure time | [Google Privacy Policy](https://policies.google.com/privacy) · [Google Maps/Google Earth Additional Terms of Service](https://maps.google.com/help/terms_maps/) |
+| **Open-Meteo Historical Weather API** (`archive-api.open-meteo.com`) | Past weather, used only if you plan a trip for a date more than about two months ago | Coordinates of points along your route; trip dates | Same as above |
+| **OpenStreetMap Nominatim** (`nominatim.openstreetmap.org`, run by the OpenStreetMap Foundation) | Town names along your route, and a name for your current location | The exact coordinates of points sampled about every 20 km (12 miles) along your route, and your exact current location if you tap "Use current location" (one request at a time, about a second apart) | [OSMF Privacy Policy](https://osmfoundation.org/wiki/Privacy_Policy) · [Nominatim Usage Policy](https://operations.osmfoundation.org/policies/nominatim/) · [OSMF Terms of Use](https://osmfoundation.org/wiki/Terms_of_Use) |
+| **Google Directions API** (`maps.googleapis.com`, Google LLC) | Driving directions (the app's main routing service) | Coordinates of your start, stops, and destination; your departure time if it's in the future | [Google Privacy Policy](https://policies.google.com/privacy) · [Google Maps/Google Earth Additional Terms of Service](https://maps.google.com/help/terms_maps/) |
 | **OSRM public routing server** (`router.project-osrm.org`, run by FOSSGIS e.V., Germany) | Backup driving directions, used only when Google's Directions service isn't available | Coordinates of your start, stops, and destination | [FOSSGIS privacy policy (German)](https://www.fossgis.de/datenschutzerklärung) · [Usage terms](https://www.fossgis.de/arbeitsgruppen/osm-server/nutzungsbedingungen/) |
-| **U.S. National Weather Service** (`api.weather.gov`, NOAA) | Active weather alerts along U.S. routes | Only the **two-letter codes of the U.S. states** your route crosses (worked out on your phone). No coordinates, place names, or other trip details. | [NWS privacy policy](https://www.weather.gov/privacy) · [NWS disclaimer](https://www.weather.gov/disclaimer) |
-| **Google Maps SDK for Android** (Google LLC) | The in-app map | The map areas you view, plus technical data the SDK collects on its own for Google: device model and OS version, SDK version, crash information, IP address, a pseudonymous Maps SDK identifier, and map interactions such as panning and zooming. Your route line and markers are drawn on your phone. | [Google Privacy Policy](https://policies.google.com/privacy) · [Google Maps/Google Earth Additional Terms of Service](https://maps.google.com/help/terms_maps/) |
-| **Google Static Maps API** (`maps.googleapis.com`) | The map image in an exported trip PDF, only when you tap Export PDF | Your route line (simplified) and the coordinates of your start, stops, and destination | Same as Google above |
+| **U.S. National Weather Service** (`api.weather.gov`, NOAA) | Active weather alerts along U.S. routes, only while **Show weather alerts** is on in Settings | The **two-letter codes of the U.S. states** your route crosses (worked out on your phone). The app then downloads the outlines of the forecast zones named in those alerts. No coordinates, place names, or other trip details are sent. | [NWS privacy policy](https://www.weather.gov/privacy) · [NWS disclaimer](https://www.weather.gov/disclaimer) |
+| **Google Maps SDK for Android** (Google LLC) | The in-app map | The map areas you view, plus technical data that, according to Google, the SDK collects for Google on its own: device model and OS version, SDK version, crash information, IP address, a pseudonymous Maps SDK identifier, and map interactions such as panning and zooming. Your route line and markers are drawn on your phone. | [Google Privacy Policy](https://policies.google.com/privacy) · [Google Maps/Google Earth Additional Terms of Service](https://maps.google.com/help/terms_maps/) |
+| **Google Static Maps API** (`maps.googleapis.com`) | The map image in an exported trip PDF, only when you tap Export PDF (no image is included if the map can't be fetched) | Your route line (simplified) and the coordinates of your start, stops, and destination | Same as Google above |
 | **Google Play services location** (on your device) | Gets your device's location when you tap "Use current location" | Handled by Android and Google Play services according to your device's location settings | [Google Privacy Policy](https://policies.google.com/privacy) |
 
-**"Open in Google Maps"**: if you tap this, the app passes your trip's start, stop, and destination coordinates to the Google Maps app, or to your web browser if Google Maps isn't installed. From then on, Google's [Privacy Policy](https://policies.google.com/privacy) and [Maps terms](https://maps.google.com/help/terms_maps/) apply.
+**"Open in Google Maps"**: if you tap this, the app opens a Google Maps directions link containing your trip's start, stop, and destination **coordinates** (no place names, times, or other details). The link opens in the Google Maps app, or in your web browser if Google Maps isn't installed. From then on, Google's [Privacy Policy](https://policies.google.com/privacy) and [Maps terms](https://maps.google.com/help/terms_maps/) apply.
 
 I don't sell your information, share it for advertising, or make money from it. Information goes to the services above only so the app can do what you asked.
 
 ## What is stored on your phone, and how to delete it
 
-- **Trips aren't sent or saved anywhere off your phone.** The current trip lives in the app's memory and disappears when the app is closed by you or by Android.
-- **Recent trips:** DrivingWeather saves your last 10 trips (start, stops, layovers, destination, and their map locations) on your phone only, so you can plan them again quickly. They are never sent to us or anyone else, are not included in device backups, and you can clear them at any time in Settings.
-- **PDF export:** when you tap **Export PDF**, the app creates a trip PDF in its private cache folder (`drivingweather-trip.pdf`, replaced by each new export). The PDF includes your start, stops, and destination (which may include coordinates if a place name couldn't be found), the route summary, weather by zone, and a map image. Android's share sheet then opens, and **you choose** which app (if any) receives the PDF. Once shared, the copy is handled by that app or recipient.
-- **To delete everything the app stores:** go to **Settings → Apps → Driving Weather → Storage → Clear storage / Clear cache**, or uninstall the app.
+- **Current trip:** the trip you're planning is kept in the app's memory while you use it. Apart from the Recent trips list below, the app doesn't save trips, and I never receive them.
+- **Recent trips:** Driving Weather saves your last 10 planned trips (start, stops, layover hours, destination, their place names and map locations, time zones, and when each trip was last planned) on your phone, so you can plan them again quickly. Departure times aren't saved. The saved list is never sent to me or anyone else, and it isn't included in device backups or in transfers to a new phone. When you plan an 11th trip, the oldest one is removed. You can remove a single trip from the list, or clear them all in **Settings → Your data → Clear recent trips**.
+- **Settings:** your choices for units, theme, map display, and weather alerts are saved on your phone. They contain no trip or location information. If you use Android's backup, Android may include them in your backup.
+- **PDF export:** when you tap **Export PDF**, the app creates a trip PDF in its private cache folder. Older exported PDFs are deleted each time you export a new one. The file is named **"Driving Weather - [start] to [destination] - [date].pdf"**, so anyone you share it with can see those place names and the travel date in the file name. The PDF includes your start, stops, and destination (which may include coordinates if a place name couldn't be found), your departure date and time, any layover hours, the route summary with the distance and drive time for each leg, weather by zone, and, when available, a map image. Android's share sheet then opens, and **you choose** which app (if any) receives the PDF. Only that one file is shared. Once shared, the copy is handled by that app or recipient.
+- **To delete everything the app stores:** clear Recent trips in the app's Settings, or go to Android **Settings → Apps → Driving Weather → Storage → Clear storage / Clear cache**, or uninstall the app.
 - **Information held by third parties:** I don't have any of your information, so I can't access or delete it, and the app has no deletion-request process. To ask a third-party service about data in its logs, contact that service through its privacy policy above.
 
 ## Children
